@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "498915b8-6333-42ba-866a-5048956a6287",
+		"name": "QA Radency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21055790"
+	},
+	"item": [
+		{
+			"name": "Part 1 Mapbox",
+			"item": [
+				{
+					"name": "Mapbox API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify point 1 instruction\", function () {\r",
+									"   const responseJson = pm.response.json();\r",
+									"   pm.expect(responseJson.routes[0].legs[0].steps[0].maneuver['instruction']).to.equal(\"Drive south on Broadway.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify point 2 instruction\", function () {\r",
+									"   const responseJson = pm.response.json();\r",
+									"   pm.expect(responseJson.routes[0].legs[0].steps[1].maneuver['instruction']).to.equal(\"Turn left onto East 12th Street.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify point 3 instruction\", function () {\r",
+									"   const responseJson = pm.response.json();\r",
+									"   pm.expect(responseJson.routes[0].legs[0].steps[2].maneuver['instruction']).to.equal(\"Turn left onto 4th Avenue.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify point 4 instruction\", function () {\r",
+									"   const responseJson = pm.response.json();\r",
+									"   pm.expect(responseJson.routes[0].legs[0].steps[3].maneuver['instruction']).to.equal(\"Turn right onto East 14th Street.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify point reached destination\", function () {\r",
+									"   const responseJson = pm.response.json();\r",
+									"   pm.expect(responseJson.routes[0].legs[0].steps[4].maneuver['instruction']).to.equal(\"You have arrived at your destination.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.mapbox.com/directions/v5/mapbox/driving/-73.9910009386083%2C40.73398566787165%3B-73.98978086196944%2C40.73437148584736%3B-73.98667783240728%2C40.73400022708091%3B-73.98473723806885%2C40.733971108659176?alternatives=true&geometries=geojson&language=en&overview=simplified&steps=true&access_token=pk.eyJ1IjoicWF0ZXN0dXNlciIsImEiOiJjbDNjdzI4dWcwMmtwM2VwcjU0dHNiZWltIn0.7TDYfpJe0YfbtiapaZd-gw",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mapbox",
+								"com"
+							],
+							"path": [
+								"directions",
+								"v5",
+								"mapbox",
+								"driving",
+								"-73.9910009386083%2C40.73398566787165%3B-73.98978086196944%2C40.73437148584736%3B-73.98667783240728%2C40.73400022708091%3B-73.98473723806885%2C40.733971108659176"
+							],
+							"query": [
+								{
+									"key": "alternatives",
+									"value": "true"
+								},
+								{
+									"key": "geometries",
+									"value": "geojson"
+								},
+								{
+									"key": "language",
+									"value": "en"
+								},
+								{
+									"key": "overview",
+									"value": "simplified"
+								},
+								{
+									"key": "steps",
+									"value": "true"
+								},
+								{
+									"key": "access_token",
+									"value": "pk.eyJ1IjoicWF0ZXN0dXNlciIsImEiOiJjbDNjdzI4dWcwMmtwM2VwcjU0dHNiZWltIn0.7TDYfpJe0YfbtiapaZd-gw"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Part 2 Jsonplaceholder",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify id on new post\", function () {\r",
+									"   const resp = pm.response.json();\r",
+									"   pm.expect(resp['id']).to.equal(101);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"userId\": 7,\r\n \"title\": \"add new post\",\r\n \"body\": \"nostrum rerum est autem sunt rem eveniet architecto\"\r\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/?body",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								""
+							],
+							"query": [
+								{
+									"key": "body",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"3\",\r\n  \"title\": \"some title\",\r\n  \"body\": \"new post body\",\r\n}"
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/6",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/5",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
