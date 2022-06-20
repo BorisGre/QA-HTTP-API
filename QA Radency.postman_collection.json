@@ -113,7 +113,7 @@
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"verify id on new post\", function () {\r",
+									"pm.test(\"verify id of new post\", function () {\r",
 									"   const resp = pm.response.json();\r",
 									"   pm.expect(resp['id']).to.equal(101);\r",
 									"});"
@@ -126,11 +126,27 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n \"userId\": 7,\r\n \"title\": \"add new post\",\r\n \"body\": \"nostrum rerum est autem sunt rem eveniet architecto\"\r\n}"
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "add new post",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "nostrum rerum est autem sunt rem eveniet architecto",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
-							"raw": "https://jsonplaceholder.typicode.com/posts/?body",
+							"raw": "https://jsonplaceholder.typicode.com/posts/",
 							"protocol": "https",
 							"host": [
 								"jsonplaceholder",
@@ -144,7 +160,8 @@
 							"query": [
 								{
 									"key": "body",
-									"value": null
+									"value": null,
+									"disabled": true
 								}
 							]
 						}
@@ -204,8 +221,24 @@
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"userId\": \"3\",\r\n  \"title\": \"some title\",\r\n  \"body\": \"new post body\",\r\n}"
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "some title",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "updated post body",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "https://jsonplaceholder.typicode.com/posts/6",
